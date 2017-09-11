@@ -1,30 +1,27 @@
 pipeline {
-  agent any
-  environment {
-    DOCKER_PASWORD = credentials('DOCKER_PASSWORD')
-  }
-
-  stages {
-    stage('greetings') {
-      steps {
-        sh '''echo "hello world"
+ agent any
+ 
+ environment {
+   DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+ }
+ 
+ stages {
+   stage('greeting') {
+     steps {
+       sh 'echo "hello, world!"'
+     }
+   }
+   stage('build docker') {
+     steps {
+       sh '''docker build -t mckdocker/popcorn:$BUILD_NUMBER .
 '''
-      }
-    }
-    stage('create docker') {
-      steps {
-        sh 'docker build -t rameshmck/popcorn:$BUILD_NUMBER .'
-      }
-    }
-    stage('push docker') {
-      steps {
-        sh '''docker login -u rameshmck -p $DOCKER_PASSWORD
-docker push rameshmck/popcorn:$BUILD_NUMBER
-'''
-      }
-    }
-  }
-  environment {
-    DOCKER_PASWORD = credentials('DOCKER_PASSWORD')
-  }
+     }
+   }
+   stage('docker push') {
+     steps {
+       sh '''docker login -u rameshmck -p $DOCKER_PASSWORD
+docker push mckdocker/popcorn:$BUILD_NUMBER'''
+     }
+   }
+ }
 }
