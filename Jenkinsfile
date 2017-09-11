@@ -20,7 +20,7 @@ pipeline {
    stage('docker push') {
      steps {
        sh '''docker login -u rameshmck -p $DOCKER_PASSWORD
-docker push mckdocker/popcorn:$BUILD_NUMBER'''
+docker push rameshmck/popcorn:$BUILD_NUMBER'''
      }
    }
  }
