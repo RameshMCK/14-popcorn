@@ -3,6 +3,7 @@ pipeline {
   environment {
     DOCKER_PASWORD = credentials('DOCKER_PASSWORD')
   }
+
   stages {
     stage('greetings') {
       steps {
@@ -12,7 +13,7 @@ pipeline {
     }
     stage('create docker') {
       steps {
-        sh 'docker build -t popcorn:$BUILD_NUMBER .'
+        sh 'docker build -t rameshmck/popcorn:$BUILD_NUMBER .'
       }
     }
     stage('push docker') {
@@ -22,5 +23,8 @@ docker push rameshmck/popcorn:$BUILD_NUMBER
 '''
       }
     }
+  }
+  environment {
+    DOCKER_PASWORD = credentials('DOCKER_PASSWORD')
   }
 }
