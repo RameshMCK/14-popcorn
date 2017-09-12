@@ -17,6 +17,13 @@ pipeline {
 '''
      }
    }
+   
+   stage('testing') {
+     steps {
+       sh '''docker run rameshmck/popcorn:$BUILD_NUMBER rails test
+'''
+     }
+   }
    stage('docker push') {
      steps {
        sh '''docker login -u rameshmck -p $DOCKER_PASSWORD
