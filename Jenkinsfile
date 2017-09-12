@@ -30,5 +30,15 @@ pipeline {
 docker push rameshmck/popcorn:$BUILD_NUMBER'''
      }
    }
+   
+      stage('deploy to k8s') {
+     steps {
+       sh '''envsubst < deployment.yaml | kubectl apply -f -
+'''
+     }
+   }
+   
+   
+   
  }
 }
