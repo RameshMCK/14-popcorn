@@ -11,16 +11,21 @@ spec:
     targetPort: 3333
   selector:
     web: rails
+<<<<<<< HEAD
     
     
 ---
 
+=======
+
+---
+>>>>>>> 02168a91e33cf44c5ff1dcd3e77cdc7abb845a39
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: d-web
 spec:
-  replicas: 5
+  replicas: 10
   template:
     metadata:
       labels:
@@ -31,3 +36,4 @@ spec:
         image: rameshmck/popcorn:$BUILD_NUMBER
         ports:
         - containerPort: 3333
+
